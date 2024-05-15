@@ -107,6 +107,7 @@ def convert_to_tensorrt_llm_config(
         "residual_mlp": model_config.layers[0].residual_mlp is not None,
         # Model Optimizer customized fields
         "bias": model_config.layers[0].attention.dense.bias is not None,
+        "attn_bias": model_config.layers[0].attention.dense.bias is not None,
         "rotary_pct": model_config.layers[0].rotary_pct,
         "rank": model_config.rank,
         "decoder": model_config.layers[0].decoder_type,
