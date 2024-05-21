@@ -223,13 +223,6 @@ def convert_to_tensorrt_llm_config(
         )
     elif decoder_type == "phi":
         config["partial_rotary_factor"] = model_config.layers[0].partial_rotary_factor
-    elif decoder_type == "medusa":
-        config.update(
-            {
-                "num_medusa_heads": model_config.num_medusa_heads,
-                "num_medusa_layers": model_config.num_medusa_layers,
-            }
-        )
     elif model_config.layers[0].rotary_base:
         config.update(
             {
