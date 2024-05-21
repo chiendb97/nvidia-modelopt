@@ -37,6 +37,7 @@ MODEL_NAME_TO_HF_ARCH_MAP = {
     "llama": "LlamaForCausalLM",
     "mpt": "MPTForCausalLM",
     "qwen": "QWenForCausalLM",
+    "kilm": "KiLMForCausalLM",
     "gemma": "GemmaForCausalLM",
     "phi": "PhiForCausalLM",
     "gpt2": "GPTForCausalLM",
@@ -214,6 +215,13 @@ def convert_to_tensorrt_llm_config(
             }
         )
     elif decoder_type == "qwen":
+        config.update(
+            {
+                "intermediate_size": model_config.layers[0].ffn_hidden_size_local * 2 * tp_size,
+                "seq_length": model_config.layers[0].seq_length,
+            }
+        )
+    elif decoder_type == "kilm":
         config.update(
             {
                 "intermediate_size": model_config.layers[0].ffn_hidden_size_local * 2 * tp_size,

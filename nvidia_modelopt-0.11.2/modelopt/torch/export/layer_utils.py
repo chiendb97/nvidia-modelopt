@@ -868,6 +868,9 @@ def build_mlp_config(module: nn.Module, decoder_type, dtype: torch.dtype) -> MLP
     if decoder_type == "qwen":
         hidden_act = "silu"
 
+    if decoder_type == "kilm":
+        hidden_act = "silu"
+
     if type(module).__name__ == "TLGv4MLP":
         hidden_act = module.config.hidden_act  # The support from TRT LLM is still on-going.
 
