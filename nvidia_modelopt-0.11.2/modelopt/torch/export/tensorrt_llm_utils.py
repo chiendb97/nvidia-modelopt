@@ -41,7 +41,6 @@ MODEL_NAME_TO_HF_ARCH_MAP = {
     "phi": "PhiForCausalLM",
     "gpt2": "GPTForCausalLM",
     "gptnext": "GPTForCausalLM",
-    "medusa": "MedusaForCausalLM",
 }
 
 
