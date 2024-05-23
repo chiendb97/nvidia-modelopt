@@ -315,6 +315,7 @@ class MedusaHeadConfig:
     medusa_layers: List[MedusaLayerConfig] = field(default_factory=list)
     lm_head: LinearConfig = None
 
+
 @dataclass
 class DecoderLayerConfig:
     """The decoder layer config."""

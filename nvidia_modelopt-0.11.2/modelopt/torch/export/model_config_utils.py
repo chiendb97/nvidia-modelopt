@@ -10,6 +10,7 @@
 
 """Common utils for the ModelConfig."""
 
+import os
 import dataclasses
 import math
 from typing import Dict, Union, get_args, get_origin
@@ -410,7 +411,11 @@ def pack_linear_weights(model_config: ModelConfig):
                         linear_layer.weights_scaling_factor,
                         model_config.quantization,
                     )
-    linear_layers = [model_config.lm_head]
+    linear_layers = []
+    enable_quantize_lm_head = os.getenv("ENABLE_QUANTIZE_LM_HEAD", 'False').lower() in ('true', '1', 't')
+    if enable_quantize_lm_head:
+        linear_layers.append(model_config.lm_head)
+
     for medusa_head_config in model_config.medusa_heads:
         linear_layers.append(medusa_head_config.lm_head)
         for medusa_layer_config in medusa_head_config.medusa_layers:
